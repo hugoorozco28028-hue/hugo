@@ -58,6 +58,7 @@
             flex-direction: column;
         }
 
+        /* Remove border animation from all boxes */
         .pricing-box::before {
             content: '';
             position: absolute;
@@ -67,13 +68,28 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
-            animation: borderLight 3s infinite linear;
             pointer-events: none;
+        }
+
+        /* Add enhanced border animation only to Platinum (third box) */
+        .pricing-box:nth-child(3) {
+            box-shadow: 0 0 20px #FED408, 0 0 40px #FED408;
+            border: 3px solid #FED408;
+            z-index: 10;
+        }
+        
+        .pricing-box:nth-child(3)::before {
+            animation: borderLight 1.5s infinite linear;
         }
 
         .pricing-box:hover {
             transform: translateY(-5px);
             box-shadow: 0 0 20px #FED408, 0 0 30px #FED408;
+        }
+        
+        /* Platinum hover effect */
+        .pricing-box:nth-child(3):hover {
+            box-shadow: 0 0 30px #FED408, 0 0 60px #FED408, 0 0 90px #FED408;
         }
 
         .plan-name {
@@ -90,6 +106,21 @@
             font-weight: 700;
             color: #FED408;
             text-shadow: 0 0 5px #FED408;
+        }
+
+        /* Remove price animation from Basic and Silver */
+        .pricing-box:nth-child(1) .price,
+        .pricing-box:nth-child(2) .price {
+            animation: none;
+        }
+
+        /* Keep price animation only on Platinum */
+        .pricing-box:nth-child(3) .price {
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+        
+        /* Enhanced glow for Platinum plan name */
+        .pricing-box:nth-child(3) .plan-name {
             animation: glow 1.5s ease-in-out infinite alternate;
         }
 
@@ -116,6 +147,11 @@
             text-shadow: 0 0 5px #FED408;
             flex-shrink: 0;
             margin-top: 3px;
+        }
+        
+        /* Platinum checkmark glow */
+        .pricing-box:nth-child(3) .features li i {
+            animation: glow 1.5s ease-in-out infinite alternate;
         }
 
         .btn-container {
@@ -149,6 +185,11 @@
             color: #000;
             box-shadow: 0 0 15px #FED408, 0 0 25px #FED408;
         }
+        
+        /* Platinum button glow */
+        .pricing-box:nth-child(3) .btn {
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
 
         .btn::before {
             content: '';
@@ -180,24 +221,38 @@
         @keyframes glow {
             0% {
                 text-shadow: 0 0 5px #FED408;
+                box-shadow: 0 0 10px #FED408;
             }
 
             100% {
-                text-shadow: 0 0 10px #FED408, 0 0 20px #FED408;
+                text-shadow: 0 0 15px #FED408, 0 0 30px #FED408;
+                box-shadow: 0 0 20px #FED408, 0 0 40px #FED408;
             }
         }
 
         @keyframes borderLight {
             0% {
                 border-color: #FED408;
-                box-shadow: 0 0 10px #FED408, inset 0 0 10px #FED408;
+                box-shadow: 0 0 15px #FED408, 0 0 30px #FED408, inset 0 0 15px #FED408;
                 filter: hue-rotate(0deg);
             }
-
+            25% {
+                border-color: #ffdb4d;
+                box-shadow: 0 0 20px #ffdb4d, 0 0 40px #ffdb4d, inset 0 0 20px #ffdb4d;
+            }
+            50% {
+                border-color: #ffef99;
+                box-shadow: 0 0 25px #ffef99, 0 0 50px #ffef99, inset 0 0 25px #ffef99;
+                filter: hue-rotate(90deg);
+            }
+            75% {
+                border-color: #ffdb4d;
+                box-shadow: 0 0 20px #ffdb4d, 0 0 40px #ffdb4d, inset 0 0 20px #ffdb4d;
+            }
             100% {
-                border-color: #ff8c00;
-                box-shadow: 0 0 15px #ff8c00, inset 0 0 15px #ff8c00;
-                filter: hue-rotate(360deg);
+                border-color: #FED408;
+                box-shadow: 0 0 15px #FED408, 0 0 30px #FED408, inset 0 0 15px #FED408;
+                filter: hue-rotate(0deg);
             }
         }
 
