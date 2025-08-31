@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
+        }
+
+        .title {
+            color: #FED408;
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 0 10px #FED408, 0 0 20px #FED408;
+            animation: pulsate 2s infinite alternate;
+        }
+
+        .pricing-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            max-width: 1200px;
+        }
+
+        .pricing-box {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            padding: 25px;
+            width: 320px;
+            box-shadow: 0 0 15px #FED408;
+            border: 2px solid #FED408;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-box::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            animation: borderLight 3s infinite linear;
+            pointer-events: none;
+        }
+
+        .pricing-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px #FED408, 0 0 30px #FED408;
+        }
+
+        .plan-name {
+            font-size: 1.8rem;
+            margin: 15px 0;
+            font-weight: 600;
+            color: #FED408;
+            text-shadow: 0 0 5px #FED408;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #FED408;
+            text-shadow: 0 0 5px #FED408;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        .features {
+            list-style-type: none;
+            margin: 20px 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(254, 212, 8, 0.3);
+            display: flex;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .features li i {
+            color: #FED408;
+            margin-right: 10px;
+            text-shadow: 0 0 5px #FED408;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .btn-container {
+            margin-top: auto;
+            padding-top: 15px;
+        }
+
+        .btn {
+            background: rgba(254, 212, 8, 0.2);
+            border: 2px solid #FED408;
+            padding: 12px 30px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: #FED408;
+            color: #000;
+            box-shadow: 0 0 15px #FED408, 0 0 25px #FED408;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Animations */
+        @keyframes pulsate {
+            0% {
+                text-shadow: 0 0 10px #FED408, 0 0 20px #FED408;
+            }
+
+            100% {
+                text-shadow: 0 0 15px #FED408, 0 0 30px #FED408, 0 0 40px #FED408;
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px #FED408;
+            }
+
+            100% {
+                text-shadow: 0 0 10px #FED408, 0 0 20px #FED408;
+            }
+        }
+
+        @keyframes borderLight {
+            0% {
+                border-color: #FED408;
+                box-shadow: 0 0 10px #FED408, inset 0 0 10px #FED408;
+                filter: hue-rotate(0deg);
+            }
+
+            100% {
+                border-color: #ff8c00;
+                box-shadow: 0 0 15px #ff8c00, inset 0 0 15px #ff8c00;
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .pricing-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .title {
+                font-size: 2.2rem;
+                margin-bottom: 25px;
+            }
+
+            .pricing-box {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.8rem;
+            }
+
+            .plan-name {
+                font-size: 1.5rem;
+            }
+
+            .price {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">PRICING PLANS</h1>
+
+    <div class="pricing-container">
+        <div class="pricing-box">
+            <h2 class="plan-name">BASIC</h2>
+            <div class="price">$499/month</div>
+            <ul class="features">
+                <li><i class="fas fa-check"></i> A strong foundation to start improving your business and personal presence</li>
+                <li><i class="fas fa-check"></i> 2 weekly calls (30 minutes each)</li>
+                <li><i class="fas fa-check"></i> Full review of problems and barriers</li>
+                <li><i class="fas fa-check"></i> Nutritional advice (optional)</li>
+                <li><i class="fas fa-check"></i> Fitness advice (optional)</li>
+                <li><i class="fas fa-check"></i> Clothing and appearance consultation</li>
+                <li><i class="fas fa-check"></i> How to command attention in any setting</li>
+                <li><i class="fas fa-check"></i> Public speaking and pitch training</li>
+                <li><i class="fas fa-check"></i> Business improvement strategies</li>
+            </ul>
+            <div class="btn-container">
+                <a href="https://buy.stripe.com/28E8wR3wW1Nm9Li8xFg3600" class="btn">Select Plan</a>
+            </div>
+        </div>
+
+        <div class="pricing-box">
+            <h2 class="plan-name">SILVER</h2>
+            <div class="price">$899/month</div>
+            <ul class="features">
+                <li><i class="fas fa-check"></i> More guidance, accountability, and real practice to accelerate your growth</li>
+                <li><i class="fas fa-check"></i> Includes everything in Basic, plus:</li>
+                <li><i class="fas fa-check"></i> 1 in-person meeting (3+ hours)</li>
+                <li><i class="fas fa-check"></i> Weekly public speaking practice</li>
+                <li><i class="fas fa-check"></i> Weekly pitch practice</li>
+                <li><i class="fas fa-check"></i> 3 weekly calls + unlimited email/text support</li>
+                <li><i class="fas fa-check"></i> In-depth business consultation</li>
+            </ul>
+            <div class="btn-container">
+                <a href="https://buy.stripe.com/dRm4gB9VkajSg9G15dg3601" class="btn">Select Plan</a>
+            </div>
+        </div>
+
+        <div class="pricing-box">
+            <h2 class="plan-name">PLATINUM</h2>
+            <div class="price">$999/month</div>
+            <ul class="features">
+                <li><i class="fas fa-check"></i> The all-access program for serious players who want constant support and real-world results</li>
+                <li><i class="fas fa-check"></i> Includes everything in Silver, plus:</li>
+                <li><i class="fas fa-check"></i> 24/7 direct personal access (call/text)</li>
+                <li><i class="fas fa-check"></i> Exclusive invitations to networking circles and events (dress code required)</li>
+                <li><i class="fas fa-check"></i> Full business overhaul with Hugo personally showing you how to hunt and close deals</li>
+                <li><i class="fas fa-check"></i> Weekly P&L and balance sheet review for financial clarity</li>
+                <li><i class="fas fa-check"></i> Membership in an elite private community group</li>
+            </ul>
+            <div class="btn-container">
+                <a href="https://buy.stripe.com/9B6aEZ5F477G0aI4hpg3602" class="btn">Select Plan</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add animation on load
+        document.addEventListener('DOMContentLoaded', function () {
+            const boxes = document.querySelectorAll('.pricing-box');
+            boxes.forEach((box, index) => {
+                box.style.opacity = '0';
+                box.style.transform = 'translateY(20px)';
+
+                setTimeout(() => {
+                    box.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    box.style.opacity = '1';
+                    box.style.transform = 'translateY(0)';
+                }, 300 * index);
+            });
+        });
+
+        // Add link click effect without preventing navigation
+        const links = document.querySelectorAll('.btn');
+        links.forEach(link => {
+            link.addEventListener('click', function (e) {
+                const originalText = this.innerHTML;
+                this.innerHTML = 'Redirecting <i class="fas fa-spinner fa-spin"></i>';
+                this.style.opacity = '0.9';
+                
+                // Allow the default link behavior to proceed
+                // The page will navigate away, so we don't need to revert the text
+            });
+        });
+    </script>
+</body>
+
+</html>
